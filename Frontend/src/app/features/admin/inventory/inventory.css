@@ -1,0 +1,31 @@
+.full-width {
+  width: 100%;
+}
+
+.warning-heading {
+  color: orange;
+}
+
+.ok-text {
+  color: green;
+}
+
+.low-stock-table {
+  margin-bottom: 32px;
+}
+
+.low-stock-val {
+  color: red;
+}
+
+.ok-stock-val {
+  color: green;
+}
+
+.stock-input {
+  width: 80px;
+  margin-right: 8px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

@@ -1,0 +1,17 @@
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.low-stock {
+  color: red;
+}
+
+.ok-stock {
+  color: green;
+}

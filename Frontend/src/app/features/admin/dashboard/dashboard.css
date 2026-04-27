@@ -1,0 +1,23 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 24px;
+}
+
+.warning-card {
+  background: #fff3e0;
+}
+
+.warning-text {
+  color: orange;
+}
+
+.full-width {
+  width: 100%;
+}

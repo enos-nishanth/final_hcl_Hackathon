@@ -1,0 +1,26 @@
+.center-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+.auth-card {
+  width: 400px;
+  padding: 24px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.error-text {
+  color: red;
+}
+
+.link-text {
+  margin-top: 16px;
+  text-align: center;
+}

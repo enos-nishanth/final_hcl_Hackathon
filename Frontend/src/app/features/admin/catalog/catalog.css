@@ -1,0 +1,14 @@
+.form-card {
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.inline-form {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.full-width {
+  width: 100%;
+}

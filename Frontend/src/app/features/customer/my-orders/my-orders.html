@@ -1,1 +1,40 @@
-<p>my-orders works!</p>
+<h2>My Orders</h2>
+
+@if (orders().length === 0) {
+  <p>No orders yet.</p>
+}
+
+<mat-accordion>
+  @for (order of orders(); track order.id) {
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Order #{{ order.id }} — ₹{{ order.totalAmount }}</mat-panel-title>
+        <mat-panel-description>
+          {{ order.orderDate | date:'medium' }} &nbsp;
+          <span [style.color]="statusColor(order.status)"><b>{{ order.status }}</b></span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <table mat-table [dataSource]="order.items" class="full-width">
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef>Product</th>
+          <td mat-cell *matCellDef="let item">{{ item.productName }}</td>
+        </ng-container>
+        <ng-container matColumnDef="qty">
+          <th mat-header-cell *matHeaderCellDef>Qty</th>
+          <td mat-cell *matCellDef="let item">{{ item.quantity }}</td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Unit Price</th>
+          <td mat-cell *matCellDef="let item">₹{{ item.unitPrice }}</td>
+        </ng-container>
+        <ng-container matColumnDef="sub">
+          <th mat-header-cell *matHeaderCellDef>Subtotal</th>
+          <td mat-cell *matCellDef="let item">₹{{ item.subTotal }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="cols"></tr>
+        <tr mat-row *matRowDef="let row; columns: cols;"></tr>
+      </table>
+    </mat-expansion-panel>
+  }
+</mat-accordion>

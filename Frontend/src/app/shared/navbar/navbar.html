@@ -1,1 +1,36 @@
-<p>navbar works!</p>
+<mat-toolbar color="primary">
+  <span routerLink="/menu" class="brand-title">SmartRetail</span>
+  <span class="spacer"></span>
+
+  <button mat-button routerLink="/menu">Menu</button>
+
+  @if (auth.isLoggedIn && auth.isCustomer) {
+    <button mat-icon-button routerLink="/cart"
+      [matBadge]="cart.itemCount()"
+      matBadgeColor="warn"
+      [matBadgeHidden]="cart.itemCount() === 0">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+    <button mat-button routerLink="/my-orders">My Orders</button>
+    <button mat-button (click)="auth.logout()">Logout ({{ auth.currentUser()?.name }})</button>
+  }
+
+  @if (auth.isLoggedIn && auth.isAdmin) {
+    <button mat-button [matMenuTriggerFor]="adminMenu">Admin ▾</button>
+    <mat-menu #adminMenu>
+      <button mat-menu-item routerLink="/admin/dashboard">Dashboard</button>
+      <button mat-menu-item routerLink="/admin/products">Products</button>
+      <button mat-menu-item routerLink="/admin/brands">Brands</button>
+      <button mat-menu-item routerLink="/admin/categories">Categories</button>
+      <button mat-menu-item routerLink="/admin/packaging">Packaging</button>
+      <button mat-menu-item routerLink="/admin/inventory">Inventory</button>
+      <button mat-menu-item routerLink="/admin/orders">Orders</button>
+    </mat-menu>
+    <button mat-button (click)="auth.logout()">Logout</button>
+  }
+
+  @if (!auth.isLoggedIn) {
+    <button mat-button routerLink="/login">Login</button>
+    <button mat-raised-button color="accent" routerLink="/register">Register</button>
+  }
+</mat-toolbar>

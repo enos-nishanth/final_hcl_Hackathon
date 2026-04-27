@@ -1,1 +1,26 @@
-<p>login works!</p>
+<div class="center-wrapper">
+  <mat-card class="auth-card">
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+        @if (error) {
+          <p class="error-text">{{ error }}</p>
+        }
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading">
+          {{ loading ? 'Logging in...' : 'Login' }}
+        </button>
+      </form>
+      <p class="link-text">
+        No account? <a routerLink="/register">Register</a>
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,1 +1,47 @@
-<p>inventory works!</p>
+<h2>Inventory Management</h2>
+
+<h3 class="warning-heading">Low Stock Items (5 or fewer)</h3>
+
+@if (lowStock().length === 0) {
+  <p class="ok-text">All items are well-stocked!</p>
+} @else {
+  <table mat-table [dataSource]="lowStock()" class="full-width low-stock-table">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Product</th>
+      <td mat-cell *matCellDef="let p">{{ p.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="stock">
+      <th mat-header-cell *matHeaderCellDef>Stock</th>
+      <td mat-cell *matCellDef="let p" class="low-stock-val"><b>{{ p.stockQuantity }}</b></td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="['name','stock']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['name','stock'];"></tr>
+  </table>
+}
+
+<h3>All Products — Update Stock</h3>
+<table mat-table [dataSource]="products()" class="full-width">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Product</th>
+    <td mat-cell *matCellDef="let p">{{ p.name }}</td>
+  </ng-container>
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef>Category</th>
+    <td mat-cell *matCellDef="let p">{{ p.categoryName }}</td>
+  </ng-container>
+  <ng-container matColumnDef="stock">
+    <th mat-header-cell *matHeaderCellDef>Current Stock</th>
+    <td mat-cell *matCellDef="let p" [class.low-stock-val]="p.stockQuantity <= 5" [class.ok-stock-val]="p.stockQuantity > 5">
+      {{ p.stockQuantity }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="update">
+    <th mat-header-cell *matHeaderCellDef>Update</th>
+    <td mat-cell *matCellDef="let p">
+      <input type="number" [(ngModel)]="newStock[p.id]" class="stock-input" />
+      <button mat-raised-button color="primary" (click)="updateStock(p.id)">Update</button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="cols"></tr>
+  <tr mat-row *matRowDef="let row; columns: cols;"></tr>
+</table>

@@ -1,0 +1,8 @@
+.brand-title {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.spacer {
+  flex: 1;
+}

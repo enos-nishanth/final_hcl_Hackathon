@@ -1,36 +1,38 @@
-<mat-toolbar color="primary">
-  <span routerLink="/menu" class="brand-title">SmartRetail</span>
+<mat-toolbar class="navbar-container">
+  <span routerLink="/menu" class="brand-title">FreshMart</span>
   <span class="spacer"></span>
 
-  <button mat-button routerLink="/menu">Menu</button>
+  <button mat-button routerLink="/menu" routerLinkActive="active-link" class="nav-link">Explore Menu</button>
 
   @if (auth.isLoggedIn && auth.isCustomer) {
-    <button mat-icon-button routerLink="/cart"
+    <button mat-icon-button routerLink="/cart" class="cart-btn"
       [matBadge]="cart.itemCount()"
       matBadgeColor="warn"
       [matBadgeHidden]="cart.itemCount() === 0">
       <mat-icon>shopping_cart</mat-icon>
     </button>
-    <button mat-button routerLink="/my-orders">My Orders</button>
-    <button mat-button (click)="auth.logout()">Logout ({{ auth.currentUser()?.name }})</button>
+    <button mat-button routerLink="/my-orders" routerLinkActive="active-link" class="nav-link">My Orders</button>
+    <button mat-button (click)="auth.logout()" class="logout-btn">
+      <mat-icon>logout</mat-icon>
+      Logout ({{ auth.currentUser()?.name }})
+    </button>
   }
 
   @if (auth.isLoggedIn && auth.isAdmin) {
-    <button mat-button [matMenuTriggerFor]="adminMenu">Admin ▾</button>
+    <button mat-button [matMenuTriggerFor]="adminMenu" class="nav-link">Admin ▾</button>
     <mat-menu #adminMenu>
-      <button mat-menu-item routerLink="/admin/dashboard">Dashboard</button>
-      <button mat-menu-item routerLink="/admin/products">Products</button>
+      <button mat-menu-item routerLink="/admin/dashboard"><mat-icon>dashboard</mat-icon>Dashboard</button>
+      <button mat-menu-item routerLink="/admin/products"><mat-icon>inventory_2</mat-icon>Products</button>
+      <button mat-menu-item routerLink="/admin/orders"><mat-icon>receipt_long</mat-icon>Orders</button>
+      <mat-divider></mat-divider>
       <button mat-menu-item routerLink="/admin/brands">Brands</button>
       <button mat-menu-item routerLink="/admin/categories">Categories</button>
-      <button mat-menu-item routerLink="/admin/packaging">Packaging</button>
-      <button mat-menu-item routerLink="/admin/inventory">Inventory</button>
-      <button mat-menu-item routerLink="/admin/orders">Orders</button>
     </mat-menu>
-    <button mat-button (click)="auth.logout()">Logout</button>
+    <button mat-button (click)="auth.logout()" class="logout-btn">Logout</button>
   }
 
   @if (!auth.isLoggedIn) {
-    <button mat-button routerLink="/login">Login</button>
-    <button mat-raised-button color="accent" routerLink="/register">Register</button>
+    <button mat-button routerLink="/login" routerLinkActive="active-link" class="nav-link">Login</button>
+    <button mat-flat-button class="register-btn" routerLink="/register">Get Started</button>
   }
 </mat-toolbar>

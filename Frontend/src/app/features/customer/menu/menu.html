@@ -1,53 +1,59 @@
-<h2>Our Menu</h2>
+<div class="container">
+  <h2>Our Selection</h2>
 
-<div class="filter-row">
-  <mat-form-field>
-    <mat-label>Filter by Category</mat-label>
-    <mat-select [(ngModel)]="selectedCategory" (ngModelChange)="filterProducts()">
-      <mat-option [value]="0">All</mat-option>
-      @for (cat of categories(); track cat.id) {
-        <mat-option [value]="cat.id">{{ cat.name }}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
+  <div class="filter-row">
+    <mat-form-field appearance="outline">
+      <mat-label>Category</mat-label>
+      <mat-select [(ngModel)]="selectedCategory" (ngModelChange)="filterProducts()">
+        <mat-option [value]="0">All Categories</mat-option>
+        @for (cat of categories(); track cat.id) {
+          <mat-option [value]="cat.id">{{ cat.name }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Search</mat-label>
-    <input matInput [(ngModel)]="searchText" (ngModelChange)="filterProducts()" placeholder="Search products..." />
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
-</div>
+    <mat-form-field appearance="outline">
+      <mat-label>Search Products</mat-label>
+      <input matInput [(ngModel)]="searchText" (ngModelChange)="filterProducts()" placeholder="What are you looking for?" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
 
-<div class="product-grid">
-  @for (product of filtered(); track product.id) {
-    <mat-card>
-      @if (product.imageUrl) {
-        <img mat-card-image [src]="product.imageUrl" [alt]="product.name" class="product-img" />
-      } @else {
-        <div class="product-placeholder">🍕</div>
-      }
-      <mat-card-header>
-        <mat-card-title>{{ product.name }}</mat-card-title>
-        <mat-card-subtitle>{{ product.brandName }} | {{ product.packagingTypeName }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p>{{ product.description }}</p>
-        <p><strong>₹{{ product.price }}</strong></p>
-        <p [class.in-stock]="product.stockQuantity > 0" [class.out-of-stock]="product.stockQuantity === 0">
-          {{ product.stockQuantity > 0 ? 'In Stock (' + product.stockQuantity + ')' : 'Out of Stock' }}
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary"
-          [disabled]="product.stockQuantity === 0"
-          (click)="addToCart(product)">
-          Add to Cart
-        </button>
-      </mat-card-actions>
-    </mat-card>
+  <div class="product-grid">
+    @for (product of filtered(); track product.id) {
+      <mat-card class="product-card">
+        @if (product.imageUrl) {
+          <img mat-card-image [src]="product.imageUrl" [alt]="product.name" class="product-img" />
+        } @else {
+          <div class="product-placeholder">📦</div>
+        }
+        <mat-card-header>
+          <mat-card-title>{{ product.name }}</mat-card-title>
+          <mat-card-subtitle>{{ product.brandName }} • {{ product.packagingTypeName }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="description">{{ product.description }}</p>
+          <div class="price-tag">₹{{ product.price }}</div>
+          <div class="stock-status" [class.in-stock]="product.stockQuantity > 0" [class.out-of-stock]="product.stockQuantity === 0">
+            {{ product.stockQuantity > 0 ? product.stockQuantity + ' in stock' : 'Out of Stock' }}
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button class="add-btn"
+            [disabled]="product.stockQuantity === 0"
+            (click)="addToCart(product)">
+            <mat-icon>add_shopping_cart</mat-icon>
+            Add to Cart
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    }
+  </div>
+
+  @if (filtered().length === 0) {
+    <div class="empty-msg">
+      <mat-icon style="font-size: 48px; width: 48px; height: 48px; margin-bottom: 16px;">search_off</mat-icon>
+      <p>No products found matching your criteria.</p>
+    </div>
   }
 </div>
-
-@if (filtered().length === 0) {
-  <p class="empty-msg">No products found.</p>
-}

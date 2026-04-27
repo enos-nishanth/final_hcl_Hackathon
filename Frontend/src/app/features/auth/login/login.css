@@ -1,26 +1,111 @@
 .center-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 80px;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)), 
+              url('/images/login-bg.png');
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
 }
 
 .auth-card {
-  width: 400px;
-  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  color: white !important;
+}
+
+mat-card-title {
+  font-size: 2rem !important;
+  font-weight: 800 !important;
+  text-align: center;
+  margin-bottom: 8px !important;
+  background: linear-gradient(to right, #60a5fa, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.025em;
+}
+
+.subtitle {
+  text-align: center;
+  color: #94a3b8;
+  margin-bottom: 32px;
+  font-size: 0.95rem;
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 16px;
+  gap: 20px;
+}
+
+/* Customizing Angular Material Form Fields for Dark/Glass look */
+::v-deep .mat-mdc-form-field {
+  width: 100%;
+}
+
+::v-deep .mat-mdc-text-field-wrapper {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  border-radius: 12px !important;
+}
+
+::v-deep .mat-mdc-form-field-label {
+  color: #94a3b8 !important;
+}
+
+::v-deep .mat-mdc-input-element {
+  color: white !important;
+}
+
+.submit-btn {
+  height: 52px !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  font-size: 1.05rem !important;
+  background: linear-gradient(to right, #2563eb, #7c3aed) !important;
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  margin-top: 12px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.4) !important;
+  filter: brightness(1.1);
 }
 
 .error-text {
-  color: red;
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  text-align: center;
+  border: 1px solid rgba(248, 113, 113, 0.2);
 }
 
 .link-text {
-  margin-top: 16px;
+  margin-top: 24px;
   text-align: center;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.link-text a {
+  color: #60a5fa;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.link-text a:hover {
+  color: #93c5fd;
+  text-decoration: underline;
 }

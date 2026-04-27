@@ -1,29 +1,39 @@
 <div class="center-wrapper">
   <mat-card class="auth-card">
     <mat-card-title>Create Account</mat-card-title>
+    <p class="subtitle">Join our community today</p>
+    
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form">
-        <mat-form-field>
-          <mat-label>Name</mat-label>
-          <input matInput formControlName="name" />
+        <mat-form-field appearance="outline">
+          <mat-label>Full Name</mat-label>
+          <input matInput formControlName="name" placeholder="John Doe" />
+          <mat-icon matPrefix>person</mat-icon>
         </mat-form-field>
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="email" />
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email Address</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="name@company.com" />
+          <mat-icon matPrefix>mail</mat-icon>
         </mat-form-field>
-        <mat-form-field>
+
+        <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password" />
+          <input matInput type="password" formControlName="password" placeholder="••••••••" />
+          <mat-icon matPrefix>lock</mat-icon>
         </mat-form-field>
+
         @if (error) {
-          <p class="error-text">{{ error }}</p>
+          <div class="error-text">{{ error }}</div>
         }
-        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading">
-          {{ loading ? 'Creating...' : 'Register' }}
+
+        <button mat-flat-button class="submit-btn" type="submit" [disabled]="form.invalid || loading">
+          {{ loading ? 'Creating Account...' : 'Register' }}
         </button>
       </form>
+
       <p class="link-text">
-        Have account? <a routerLink="/login">Login</a>
+        Already have an account? <a routerLink="/login">Sign In</a>
       </p>
     </mat-card-content>
   </mat-card>
